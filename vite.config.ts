@@ -7,8 +7,8 @@ export default ({ mode }) => {
   console.log(loadEnv(mode, process.cwd()).VITE_GITHUB_REPOSITORY);
   return defineConfig({
     plugins: [react()],
-    base: ((loadEnv(mode, process.cwd()).GITHUB_REPOSITORY ?? "") + "/").match(
-      /(\/.*)/
-    )?.[1],
+    base: (
+      (loadEnv(mode, process.cwd()).VITE_GITHUB_REPOSITORY ?? "") + "/"
+    ).match(/(\/.*)/)?.[1],
   });
 };
