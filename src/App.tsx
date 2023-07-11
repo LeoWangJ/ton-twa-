@@ -11,6 +11,11 @@ function App() {
     is_visible: true,
     test: 'I am leo'
   }));
+  WebApp.onEvent('settingsButtonClicked', (message) => {
+    console.log(message)
+  })
+
+  WebApp.sendData('memesa')
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
