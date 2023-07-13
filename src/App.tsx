@@ -1,3 +1,4 @@
+import axios from "axios";
 import "./App.css";
 import TonConnector from "./components/Ton-Connector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -5,7 +6,7 @@ import WebApp from '@twa-dev/sdk'
 const queryClient = new QueryClient();
 
 function App() {
-  console.log(WebApp)
+  console.log(WebApp.initData)
   WebApp.showAlert('Hey there!');
   WebApp.sendData(JSON.stringify({
     is_visible: true,
@@ -14,8 +15,18 @@ function App() {
   WebApp.onEvent('settingsButtonClicked', (message) => {
     console.log(message)
   })
+  sendMessage('', true);
 
-  WebApp.sendData('memesa')
+  function sendMessage(msg_id: string, with_webview: boolean) {
+    if (!WebApp.initDataUnsafe.query_id) {
+      alert('WebViewQueryId not defined');
+      return;
+    }
+    // axios.post('http://localhost:80/demo/sendMessage', {
+    //   _auth: WebApp.initData, msg_id: msg_id || '', with_webview: !WebApp.initDataUnsafe.receiver && with_webview ? 1 : 0
+    // })
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
